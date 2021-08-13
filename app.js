@@ -3,17 +3,21 @@ const app = express();
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 
-const rotaProdutos = require('./routes/produtos');
 const rotaUsers = require('./routes/users');
 const rotaDisciplinas = require('./routes/disciplinas');
+const rotaNotas = require('./routes/notas')
+const rotaTarefas = require('./routes/tarefasUsuario')
+const rotaTarefasDisc = require('./routes/tarefasDisciplinasUsusario')
 
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.use('/produtos', rotaProdutos);
 app.use('/users', rotaUsers);
 app.use('/disciplinas', rotaDisciplinas);
+app.use('/notas', rotaNotas);
+app.use('/tarUsuario', rotaTarefas);
+app.use('/tarUsuDiscip', rotaTarefasDisc);
 app.use( (req, res, next) =>{
     res.status(200).send({
         mensagem: 'OK, deu certo'
